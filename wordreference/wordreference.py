@@ -79,6 +79,7 @@ def get_dictionary(word: str) -> tuple:
                 if sentence_td.get('class') == ['FrEx']:    # English sentence.
                     meanings[current_section][current_index]['example'] = sentence_td.get_text()
                 if sentence_td.get('class') == ['ToEx']:    # Chinese translation.
-                    meanings[current_section][current_index]['example_translation'] = sentence_td.get_text()
+                    if 'ⓘ这句话不是该英语句子的翻译。' not in sentence_td.get_text():
+                        meanings[current_section][current_index]['example_translation'] = sentence_td.get_text()
 
     return uk_pronunciation, us_pronunciation, sections, meanings
