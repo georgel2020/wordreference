@@ -3,7 +3,10 @@ from wordreference.cli import *
 
 def main():
     args = get_args()
-    sections, meanings = get_dictionary(args.word)
+
+    uk_pronunciation, us_pronunciation, sections, meanings = get_dictionary(args.word)
+
+    print(f'{Colors.BRIGHT_CYAN}{args.word}{Colors.RESET} {Colors.CYAN}UK {uk_pronunciation} US {us_pronunciation}{Colors.RESET}')
 
     for index in range(len(sections)):
         print(f'{Colors.BRIGHT_RED}{sections[index]}{Colors.RESET}')

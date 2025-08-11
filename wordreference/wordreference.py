@@ -1,13 +1,25 @@
 import requests
 from bs4 import BeautifulSoup
+import re
 
-def get_dictionary(word: str) -> tuple:
+def get_soup(word: str) -> BeautifulSoup:
     url = f'https://www.wordreference.com/enzh/{word}'
     response = requests.get(url)
-    if response.status_code != 200:
-        return '', ''
+    response.raise_for_status()
+    return BeautifulSoup(response.text, 'html.parser')
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+def get_dictionary(word: str) -> tuple:
+    soup = get_soup(word)
+
+    pronunciation_widget = soup.find('div', id='pronunciation_widget')
+
+    uk_pronunciation = None
+    us_pronunciation = None
+    uk_text = pronunciation_widget.find('span', class_='pronWR').get_text()
+    uk_pronunciation = re.search(r'(/.*/)', uk_text).group(1)
+    us_text = pronunciation_widget.find('span', class_='pronRH').get_text()
+    us_pronunciation = re.search(r'(/.*/)', us_text).group(1)
+
     article_wrd = soup.find('div', id='articleWRD')
     table_rows = article_wrd.find_all('tr', class_=['odd', 'even', 'wrtopsection'])
 
@@ -58,4 +70,4 @@ def get_dictionary(word: str) -> tuple:
                 if sentence_td.get('class') == ['ToEx']:
                     meanings[current_section][current_index]['example_translation'] = sentence_td.get_text()
 
-    return sections, meanings
+    return uk_pronunciation, us_pronunciation, sections, meanings
