@@ -32,7 +32,7 @@ def get_dictionary(word: str) -> tuple:
             columns = row.find_all('td')
             if columns[0].get('class') == ['FrWrd']:
                 meanings[current_section].append({})
-                meanings[current_section][current_index]['meaning'] = columns[0].find('strong').get_text()
+                meanings[current_section][current_index]['source'] = columns[0].find('strong').get_text()
                 if columns[0].find('em', class_='POS2'):
                     meanings[current_section][current_index]['part_of_speech'] = columns[0].find('em', class_='POS2').get_text()
                 meanings[current_section][current_index]['synonym'] = columns[1].get_text()
@@ -44,11 +44,11 @@ def get_dictionary(word: str) -> tuple:
                         simplified_zhgroup.find('span', class_='simplified').extract()
                     if simplified_zhgroup.find('span', class_='pinyintxt'):
                         simplified_zhgroup.find('span', class_='pinyintxt').extract()
-                simplified_translation = '，'.join([simplified_zhgroup.get_text().strip() for simplified_zhgroup in simplified_zhgroups])
-                if 'simplified_translations' in meanings[current_section][current_index].keys():
-                    meanings[current_section][current_index]['simplified_translation'] += '，' + simplified_translation
+                translation = '，'.join([simplified_zhgroup.get_text().strip() for simplified_zhgroup in simplified_zhgroups])
+                if 'translations' in meanings[current_section][current_index].keys():
+                    meanings[current_section][current_index]['translation'] += '，' + translation
                 else:
-                    meanings[current_section][current_index]['simplified_translation'] = simplified_translation
+                    meanings[current_section][current_index]['translation'] = translation
 
         if len(row.find_all('td')) == 2:
             sentence_td = row.find('td', colspan='2')
