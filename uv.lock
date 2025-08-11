@@ -152,5 +152,5 @@ requires-dist = [
     { name = "argparse", specifier = ">=1.4.0" },
     { name = "bs4", specifier = ">=0.0.2" },
     { name = "requests", specifier = ">=2.32.4" },
-    { name = "setuptools", specifier = ">=61.0" },
+    { name = "setuptools", specifier = ">=80.9.0" },
 ]

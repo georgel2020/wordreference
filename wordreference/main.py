@@ -5,10 +5,20 @@ def main():
     args = get_args()
     sections, meanings = get_dictionary(args.word)
 
-    for section in range(len(meanings)):
-        print(sections[section])
-        for index in range(len(meanings[section])):
-            print(meanings[section][index])
+    for index in range(len(sections)):
+        print(f'{Colors.BRIGHT_RED}{sections[index]}{Colors.RESET}')
+        for meaning in meanings[index]:
+            source = meaning.get('source', '')
+            part_of_speech = meaning.get('part_of_speech', '')
+            synonym = meaning.get('synonym', '')
+            translation = meaning.get('translation', '')
+            example = meaning.get('example', '')
+            example_translation = meaning.get('example_translation', '')
+            print(f'{Colors.BRIGHT_CYAN}{source}{Colors.RESET} {Colors.BRIGHT_BLUE}{part_of_speech}{Colors.RESET} {synonym} {translation}')
+            if example:
+                print(f'{Colors.DARK_GRAY}{example}{Colors.RESET}')
+            if example_translation:
+                print(f'{Colors.DARK_GRAY}{example_translation}{Colors.RESET}')
 
 if __name__ == "__main__":
     main()
