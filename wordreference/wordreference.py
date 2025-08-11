@@ -53,7 +53,7 @@ def get_dictionary(word: str) -> tuple:
             # The first line of a meaning.
             if columns[0].get('class') == ['FrWrd']:
                 meanings[current_section].append({})
-                meanings[current_section][current_index]['source'] = columns[0].find('strong').get_text()
+                meanings[current_section][current_index]['source'] = columns[0].find('strong').get_text().strip('⇒')    # Remove conjugate button.
                 if columns[0].find('em', class_='POS2'):
                     meanings[current_section][current_index]['part_of_speech'] = columns[0].find('em', class_='POS2').get_text()
                 meanings[current_section][current_index]['synonym'] = columns[1].get_text()
