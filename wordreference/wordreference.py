@@ -18,7 +18,7 @@ def get_dictionary(word: str) -> tuple:
     last_class = 'odd'
     for row in table_rows:
         if 'wrtopsection' in row.get('class'):
-            sections.append(row.get_text())
+            sections.append(row.get_text().strip('：'))
             current_section += 1
             meanings.append([])
             current_index = 0
