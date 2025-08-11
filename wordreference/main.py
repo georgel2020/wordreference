@@ -1,7 +1,9 @@
-from wordreference import *
+from wordreference.wordreference import *
+from wordreference.cli import *
 
 def main():
-    sections, meanings = get_dictionary('test')
+    args = get_args()
+    sections, meanings = get_dictionary(args.word)
 
     for section in range(len(meanings)):
         print(sections[section])
