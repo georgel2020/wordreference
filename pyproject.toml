@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "wordreference"
 version = "0.1.0"
-description = "Add your description here"
+description = "Retrieve word information from WordReference"
 requires-python = ">=3.13"
 dependencies = [
     "argparse>=1.4.0",
