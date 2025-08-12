@@ -4,8 +4,17 @@ from wordreference.cli import *
 def main():
     args = get_args()
 
-    uk_pronunciation, us_pronunciation, sections, meanings = get_dictionary(args.word)
+    dictionary = get_dictionary(args.word)
+    error = dictionary.get('error')
 
+    if error:
+        print(f'{Colors.BRIGHT_RED}在 WordReference 英-汉词典中，没有发现 \'{args.word}\' 的翻译{Colors.RESET}')
+        return
+
+    uk_pronunciation = dictionary['pronunciation'].get('uk', '')
+    us_pronunciation = dictionary['pronunciation'].get('us', '')
+    sections = dictionary.get('sections', [])
+    meanings = dictionary.get('meanings', [])
     print(f'{Colors.BRIGHT_CYAN}{args.word}{Colors.RESET}{Colors.CYAN}{' UK ' + uk_pronunciation if uk_pronunciation else ''}{' US ' + us_pronunciation if us_pronunciation else ''}{Colors.RESET}')
 
     for index in range(len(sections)):
