@@ -16,3 +16,9 @@ wordreference hello
 wordreference hello -b
 wordreference hello --brief
 ```
+
+支持同时查询多个单词：
+
+```
+wordreference hello world
+```
