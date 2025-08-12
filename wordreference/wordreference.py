@@ -17,12 +17,21 @@ def get_dictionary(word: str) -> tuple:
     soup = get_soup(word)
 
     # Extract pronunciations.
+    uk_pronunciation = ''
+    us_pronunciation = ''
     pronunciation_widget = soup.find('div', id='pronunciation_widget')
+    if pronunciation_widget:
+        if pronunciation_widget.find('input', class_='more-pron-state'):
+            pronunciation_widget.find('div', class_='more-pron-target').extract()   # Remove hidden pronunciations.
 
-    uk_text = pronunciation_widget.find('span', class_='pronWR').get_text()
-    uk_pronunciation = re.search(r'(/.*/)', uk_text).group(1)
-    us_text = pronunciation_widget.find('span', class_='pronRH').get_text()
-    us_pronunciation = re.search(r'(/.*/)', us_text).group(1)
+        uk_pronunciation_span = pronunciation_widget.find('span', class_='pronWR')
+        if uk_pronunciation_span:
+            uk_pronunciation_span.find('span', style='font-size:12px').extract()
+            uk_pronunciation = uk_pronunciation_span.get_text().strip()
+        us_pronunciation_span = pronunciation_widget.find('span', class_='pronRH')
+        if us_pronunciation_span:   # Sometimes only UK pronunciation is available.
+            us_pronunciation_span.find('span', style='font-size:12px').extract()
+            us_pronunciation = us_pronunciation_span.get_text().strip()
 
     # Extract meanings.
     article_wrd = soup.find('div', id='articleWRD')
