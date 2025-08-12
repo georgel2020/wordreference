@@ -8,7 +8,7 @@
 wordreference hello
 ```
 
-<img width="1011" height="527" alt="image" src="https://github.com/user-attachments/assets/c35175fc-924e-4c23-9931-a2c2436a8f00" />
+<img width="1233" height="526" alt="image" src="https://github.com/user-attachments/assets/f023344f-8754-4de0-a717-fea7b81895cc" />
 
 为隐藏例句，可添加 `-b` 或 `--brief`。
 
