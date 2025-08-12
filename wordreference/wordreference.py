@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 
 def get_soup(word: str) -> BeautifulSoup:
     """Get BeautifulSoup object from WordReference. """
