@@ -6,7 +6,7 @@ def main():
 
     uk_pronunciation, us_pronunciation, sections, meanings = get_dictionary(args.word)
 
-    print(f'{Colors.BRIGHT_CYAN}{args.word}{Colors.RESET} {Colors.CYAN}UK {uk_pronunciation} US {us_pronunciation}{Colors.RESET}')
+    print(f'{Colors.BRIGHT_CYAN}{args.word}{Colors.RESET}{Colors.CYAN}{' UK ' + uk_pronunciation if uk_pronunciation else ''}{' US ' + us_pronunciation if us_pronunciation else ''}{Colors.RESET}')
 
     for index in range(len(sections)):
         print(f'{Colors.BRIGHT_RED}{sections[index]}{Colors.RESET}')
