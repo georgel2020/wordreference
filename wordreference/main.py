@@ -5,8 +5,9 @@ def main():
     args = get_args()
 
     dictionary = get_dictionary(args.word)
-    error = dictionary.get('error')
+    brief_mode = args.brief
 
+    error = dictionary.get('error')
     if error:
         print(f'{Colors.BRIGHT_RED}在 WordReference 英-汉词典中，没有发现 \'{args.word}\' 的翻译{Colors.RESET}')
         return
@@ -27,9 +28,9 @@ def main():
             example = meaning.get('example', '')
             example_translation = meaning.get('example_translation', '')
             print(f'{Colors.BRIGHT_CYAN}{source}{Colors.RESET} {Colors.BRIGHT_BLUE}{part_of_speech}{Colors.RESET} {synonym} {translation}')
-            if example:
+            if example and not brief_mode:
                 print(f'{Colors.DARK_GRAY}{example}{Colors.RESET}')
-            if example_translation:
+            if example_translation and not brief_mode:
                 print(f'{Colors.DARK_GRAY}{example_translation}{Colors.RESET}')
 
 if __name__ == "__main__":

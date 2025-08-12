@@ -4,6 +4,7 @@ def get_args():
     """Get command line arguments."""
     parser = argparse.ArgumentParser(description='Get word meaning from WordReference')
     parser.add_argument('word', help='word to get Chinese meaning')
+    parser.add_argument('-b', '--brief', action='store_true', help='brief mode, hide example sentences')
     return parser.parse_args()
 
 class Colors:
