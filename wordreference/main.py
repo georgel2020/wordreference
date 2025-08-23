@@ -10,7 +10,7 @@ def main():
 
         error = dictionary.get('error')
         if error:
-            print(f'{Colors.BRIGHT_RED}在 WordReference 英-汉词典中，没有发现 \'{args.word}\' 的翻译{Colors.RESET}')
+            print(f'{Colors.BRIGHT_RED}在 WordReference 英-汉词典中，没有发现 \'{word}\' 的翻译{Colors.RESET}')
             return
 
         uk_pronunciation = dictionary['pronunciation'].get('uk', '')
