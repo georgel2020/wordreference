@@ -35,11 +35,13 @@ def get_dictionary(word: str) -> dict:
 
         uk_pronunciation_span = pronunciation_widget.find('span', class_='pronWR')
         if uk_pronunciation_span:
-            uk_pronunciation_span.find('span', style='font-size:12px').extract()
+            if uk_pronunciation_span.find('span', style='font-size:12px'):
+                uk_pronunciation_span.find('span', style='font-size:12px').extract()
             dictionary['pronunciation']['uk'] = uk_pronunciation_span.get_text().strip()
         us_pronunciation_span = pronunciation_widget.find('span', class_='pronRH')
         if us_pronunciation_span:   # Sometimes only UK pronunciation is available.
-            us_pronunciation_span.find('span', style='font-size:12px').extract()
+            if us_pronunciation_span.find('span', style='font-size:12px'):
+                us_pronunciation_span.find('span', style='font-size:12px').extract()
             dictionary['pronunciation']['us'] = us_pronunciation_span.get_text().strip()
 
     # Extract meanings.
