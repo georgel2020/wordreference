@@ -5,6 +5,7 @@ def get_args():
     parser = argparse.ArgumentParser(description='Get word meaning from WordReference')
     parser.add_argument('words', nargs='+', help='a list of words to get Chinese meaning')
     parser.add_argument('-b', '--brief', action='store_true', help='brief mode, hide example sentences')
+    parser.add_argument('-f', '--file', dest='filename', metavar='FILENAME', help='write output to file')
     return parser.parse_args()
 
 class Colors:
@@ -25,3 +26,7 @@ class Colors:
     BRIGHT_CYAN = '\033[96m'
     WHITE = '\033[97m'
     RESET = '\033[0m'
+
+class NoColors:
+    def __getattr__(self, name):
+        return ""
