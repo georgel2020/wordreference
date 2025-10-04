@@ -17,6 +17,12 @@ wordreference hello -b
 wordreference hello --brief
 ```
 
+可通过 `-f` 或 `--file` 输出至文件：
+
+```
+wordreference hello -f file.txt
+```
+
 支持同时查询多个单词：
 
 ```
